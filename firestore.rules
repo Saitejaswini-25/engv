@@ -1,0 +1,23 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ✅ 1. Explicit bookings rule comes first
+    match /bookings/{bookingId} {
+      allow create: if request.auth != null;
+      allow read: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+
+    // ✅ 2. sessions rule
+    match /sessions/{sessionId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == 'jL1HO03wyNU9qcvQU9ilNcuUoiG2';
+    }
+
+    // ✅ 3. Catch-all fallback
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
