@@ -20,26 +20,40 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-bold mb-4 border-b border-gray-700 pb-2">Quick Links</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/" className="text-gray-300 hover:text-white transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link to="/about" className="text-gray-300 hover:text-white transition-colors">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="text-gray-300 hover:text-white transition-colors">
-                  Contact Us
-                </Link>
-              </li>
-            </ul>
-          </div>
+         {/* Quick Links */}
+<div>
+  <h3 className="text-lg font-bold mb-4 border-b border-gray-700 pb-2">Quick Links</h3>
+  <ul className="space-y-2">
+    <li>
+      <Link
+        to="/"
+        onClick={() => window.scrollTo(0, 0)}
+        className="text-gray-300 hover:text-white transition-colors"
+      >
+        Home
+      </Link>
+    </li>
+    <li>
+      <Link
+        to="/about"
+        onClick={() => window.scrollTo(0, 0)}
+        className="text-gray-300 hover:text-white transition-colors"
+      >
+        About Us
+      </Link>
+    </li>
+    <li>
+      <Link
+        to="/contact"
+        onClick={() => window.scrollTo(0, 0)}
+        className="text-gray-300 hover:text-white transition-colors"
+      >
+        Contact Us
+      </Link>
+    </li>
+  </ul>
+</div>
+
 
           {/* Services */}
           <div>
