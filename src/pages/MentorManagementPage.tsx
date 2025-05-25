@@ -29,32 +29,8 @@ const sampleMentors = [
       { name: 'Case Competition & Deck Review', duration: '30 Min', price: 99, type: '1:1 Call' },
     ],
   },
-  {
-    name: 'Abhishek Matlotia',
-    expertise: 'Business And Management',
-    bio: 'Product Manager @ Orient Electric | MBA @ IIM Udaipur, Ex-Arctic Invent, ICICI... ',
-    imageUrl: 'https://randomuser.me/api/portraits/men/33.jpg',
-    rating: 5.0,
-    reviews: 103,
-    experience: 4,
-    topMentor: true,
-    services: [
-      { name: 'Quick Call | Mentorship', duration: '15 Min', price: 49, type: '1:1 Call' },
-    ],
-  },
-  {
-    name: 'Ujjwal Batra',
-    expertise: 'Business And Management',
-    bio: 'Brand Manager @ Aditya Birla Group | 73k+ Impressions | Marketing Storyteller',
-    imageUrl: 'https://randomuser.me/api/portraits/men/34.jpg',
-    rating: 4.5,
-    reviews: 13,
-    experience: 2,
-    topMentor: false,
-    services: [
-      { name: 'Quick Call', duration: '15 Min', price: 49, type: '1:1 Call' },
-    ],
-  },
+ 
+
 ];
 
 const MentorManagementPage: React.FC = () => {
