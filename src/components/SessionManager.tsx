@@ -13,6 +13,7 @@ interface Session {
   instructor: string;
   level: string;
   whatsappGroupLink?: string;
+  price: number;
 }
 
 const ADMIN_UID = 'jL1HO03wyNU9qcvQU9ilNcuUoiG2';
@@ -28,8 +29,11 @@ const SessionManager: React.FC = () => {
     instructor: '',
     level: 'Beginner',
     whatsappGroupLink: '',
+    price: 0,
   });
+
   const [ampm, setAmpm] = useState<'AM' | 'PM'>('AM');
+  const [isPaid, setIsPaid] = useState(false);
   const { currentUser } = useAuth();
 
   useEffect(() => {
@@ -42,7 +46,6 @@ const SessionManager: React.FC = () => {
     return null;
   }
 
-  // Helper to convert 12-hour time + AM/PM to 24-hour format
   function to24Hour(time: string, ampm: 'AM' | 'PM') {
     let [hour, minute] = time.split(':').map(Number);
     if (ampm === 'PM' && hour < 12) hour += 12;
@@ -50,7 +53,6 @@ const SessionManager: React.FC = () => {
     return `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
   }
 
-  // Helper to show time in 12-hour format in the input
   function to12Hour(time: string) {
     if (!time) return '';
     let [hour, minute] = time.split(':').map(Number);
@@ -61,7 +63,6 @@ const SessionManager: React.FC = () => {
   }
 
   const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Always keep the input in 12-hour format
     setSession({ ...session, time: e.target.value });
   };
 
@@ -84,11 +85,11 @@ const SessionManager: React.FC = () => {
         capacity: session.maxBookings,
         enrolled: session.currentBookings,
         whatsappGroupLink: session.whatsappGroupLink,
+        price: session.price,
         createdAt: serverTimestamp(),
         status: 'available',
       });
-      
-      // Reset form
+
       setSession({
         date: '',
         time: '',
@@ -99,8 +100,10 @@ const SessionManager: React.FC = () => {
         instructor: '',
         level: 'Beginner',
         whatsappGroupLink: '',
+        price: 0,
       });
       setAmpm('AM');
+      setIsPaid(false);
       alert('Session added successfully!');
     } catch (error) {
       console.error('Error adding session:', error);
@@ -122,7 +125,7 @@ const SessionManager: React.FC = () => {
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
           />
         </div>
-        
+
         <div>
           <label className="block text-sm font-medium text-gray-700">Time</label>
           <div className="flex gap-2">
@@ -146,7 +149,7 @@ const SessionManager: React.FC = () => {
           </div>
           <span className="text-xs text-gray-400">Enter time as hh:mm and select AM/PM</span>
         </div>
-        
+
         <div>
           <label className="block text-sm font-medium text-gray-700">Topic</label>
           <input
@@ -158,7 +161,7 @@ const SessionManager: React.FC = () => {
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
           />
         </div>
-        
+
         <div>
           <label className="block text-sm font-medium text-gray-700">Maximum Bookings</label>
           <input
@@ -170,7 +173,7 @@ const SessionManager: React.FC = () => {
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
           />
         </div>
-        
+
         <div>
           <label className="block text-sm font-medium text-gray-700">Domain</label>
           <select
@@ -184,12 +187,12 @@ const SessionManager: React.FC = () => {
             <option value="Aptitude">Aptitude</option>
             <option value="IOT and Embedded systems">IOT and Embedded systems</option>
             <option value="AI & ML">AI & ML</option>
-             <option value="Java Complete Course">Java Complete Course</option>
-             <option value="VLSI">VLSI</option>
-             <option value="Database Management System">Database Management System</option>
+            <option value="Java Complete Course">Java Complete Course</option>
+            <option value="VLSI">VLSI</option>
+            <option value="Database Management System">Database Management System</option>
           </select>
         </div>
-        
+
         <div>
           <label className="block text-sm font-medium text-gray-700">Instructor</label>
           <input
@@ -201,20 +204,51 @@ const SessionManager: React.FC = () => {
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
           />
         </div>
-        
-       
-        
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Session Type</label>
+          <select
+            value={isPaid ? 'paid' : 'free'}
+            onChange={(e) => {
+              const paid = e.target.value === 'paid';
+              setIsPaid(paid);
+              setSession({ ...session, price: paid ? session.price : 0 });
+            }}
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+          >
+            <option value="free">Free</option>
+            <option value="paid">Paid</option>
+          </select>
+        </div>
+
+        {isPaid && (
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Price (₹)</label>
+            <input
+              type="number"
+              value={session.price}
+              onChange={(e) =>
+                setSession({ ...session, price: parseFloat(e.target.value) })
+              }
+              required={isPaid}
+              min="0"
+              placeholder="Enter price"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+            />
+          </div>
+        )}
+
         <div>
           <label className="block text-sm font-medium text-gray-700">WhatsApp Group Link</label>
           <input
             type="url"
             value={session.whatsappGroupLink}
-            onChange={e => setSession({ ...session, whatsappGroupLink: e.target.value })}
+            onChange={(e) => setSession({ ...session, whatsappGroupLink: e.target.value })}
             placeholder="https://chat.whatsapp.com/your-group-link"
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
           />
         </div>
-        
+
         <button
           type="submit"
           className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
@@ -226,4 +260,4 @@ const SessionManager: React.FC = () => {
   );
 };
 
-export default SessionManager; 
+export default SessionManager;
