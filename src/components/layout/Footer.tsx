@@ -20,40 +20,38 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Quick Links */}
-         {/* Quick Links */}
-<div>
-  <h3 className="text-lg font-bold mb-4 border-b border-gray-700 pb-2">Quick Links</h3>
-  <ul className="space-y-2">
-    <li>
-      <Link
-        to="/"
-        onClick={() => window.scrollTo(0, 0)}
-        className="text-gray-300 hover:text-white transition-colors"
-      >
-        Home
-      </Link>
-    </li>
-    <li>
-      <Link
-        to="/about"
-        onClick={() => window.scrollTo(0, 0)}
-        className="text-gray-300 hover:text-white transition-colors"
-      >
-        About Us
-      </Link>
-    </li>
-    <li>
-      <Link
-        to="/contact"
-        onClick={() => window.scrollTo(0, 0)}
-        className="text-gray-300 hover:text-white transition-colors"
-      >
-        Contact Us
-      </Link>
-    </li>
-  </ul>
-</div>
-
+          <div>
+            <h3 className="text-lg font-bold mb-4 border-b border-gray-700 pb-2">Quick Links</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link
+                  to="/"
+                  onClick={() => window.scrollTo(0, 0)}
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/about"
+                  onClick={() => window.scrollTo(0, 0)}
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/contact"
+                  onClick={() => window.scrollTo(0, 0)}
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
+                  Contact Us
+                </Link>
+              </li>
+            </ul>
+          </div>
 
           {/* Services */}
           <div>
@@ -99,11 +97,9 @@ const Footer: React.FC = () => {
                 <MessageSquare size={24} />
               </a>
               <a 
-                href="https://chat.whatsapp.com/IUm5d7vPBWG1Y7Eukcb7vG" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+                href="tel:9964030096"
                 className="text-gray-300 hover:text-white transition-colors"
-                aria-label="WhatsApp"
+                aria-label="Call 9964030096"
               >
                 <Phone size={24} />
               </a>
