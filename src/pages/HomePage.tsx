@@ -119,24 +119,7 @@ const HomePage: React.FC = () => {
       Book 1:1 Session
     </button>
 
-    {showCVText && (
-      <div
-        style={{
-          color: '#6b7280',
-          marginTop: '4px',
-          fontSize: '0.95em',
-          fontWeight: 400,
-          position: 'absolute',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          top: '110%',
-          whiteSpace: 'nowrap',
-          zIndex: 10,
-        }}
-      >
-        Get your CV reviewed to boost your career.
-      </div>
-    )}
+  
   </div>
 
   <Link
