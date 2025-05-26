@@ -184,8 +184,8 @@ const Navbar: React.FC = () => {
                   <Link to="/aptitude" className="nav-link">Mock Tests</Link>
                   <Link to="/handouts" className="nav-link">Notes</Link>
                   <Link to="/mentorship" className="nav-link">Mentors</Link>
-                  <Link to="/" className="nav-link">Hack&Quiz Hub</Link>
-                  <Link to="/" className="nav-link">Coding Point</Link>
+                  <Link to="/hack" className="nav-link">Hack&Quiz Hub</Link>
+                  <Link to="/code" className="nav-link">Coding Point</Link>
                 </>
               )}
             </nav>
