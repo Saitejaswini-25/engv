@@ -45,7 +45,7 @@ const MentorBookingPage: React.FC = () => {
         razorpayContainerRef.current.innerHTML = ''; // clear old script if any
         const script = document.createElement('script');
         script.src = 'https://checkout.razorpay.com/v1/payment-button.js';
-        script.setAttribute('data-payment_button_id', 'pl_QW1fJCrtt19YE2'); // ✅ your correct ID
+        script.setAttribute('data-payment_button_id', 'pl_QZQCMR4tWobPfx'); // ✅ your correct ID
         script.async = true;
         razorpayContainerRef.current.appendChild(script);
       }
