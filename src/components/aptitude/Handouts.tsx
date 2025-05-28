@@ -94,25 +94,42 @@ const Handouts: React.FC = () => {
     <div className="max-w-6xl mx-auto p-6">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Study Handouts</h1>
-        <div className="flex gap-2">
-          {categories.map(category => (
-            <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`px-4 py-2 rounded-md transition-colors ${
-                selectedCategory === category
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-100 hover:bg-gray-200'
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
+       {/* Desktop category buttons */}
+<div className="hidden md:flex gap-2">
+  {categories.map(category => (
+    <button
+      key={category}
+      onClick={() => setSelectedCategory(category)}
+      className={`px-4 py-2 rounded-md transition-colors ${
+        selectedCategory === category
+          ? 'bg-blue-600 text-white'
+          : 'bg-gray-100 hover:bg-gray-200'
+      }`}
+    >
+      {category}
+    </button>
+  ))}
+</div>
+
+{/* Mobile dropdown for categories */}
+<div className="md:hidden">
+  <select
+    value={selectedCategory}
+    onChange={(e) => setSelectedCategory(e.target.value)}
+    className="px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 w-full"
+  >
+    {categories.map((category) => (
+      <option key={category} value={category}>
+        {category}
+      </option>
+    ))}
+  </select>
+</div>
+
       </div>
 
       {/* Upload Section - Only visible to the allowed user */}
-      {currentUser.uid === 'mI00k7qWEyX6XYmjHD181DcV7i82' && (
+      {currentUser.uid === 'jL1HO03wyNU9qcvQU9ilNcuUoiG2' && (
         <div className="bg-white p-6 rounded-lg shadow-md mb-8">
           <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Upload className="w-5 h-5" />
