@@ -62,15 +62,10 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   if (!isVerified) {
     return <Navigate to="/verify-email" state={{ from: location }} replace />;
   }
-const allowedPaths = ['/mocktests', '/notes'];
-
-const isAllowedPath = allowedPaths.some(path =>
-  location.pathname.startsWith(path)
-);
-
-if (!isProfileComplete && !location.pathname.startsWith('/profile') && !isAllowedPath) {
+if (!isProfileComplete && location.pathname !== '/profile') {
   return <Navigate to="/profile" replace />;
 }
+
 
 
   return <>{children}</>;
