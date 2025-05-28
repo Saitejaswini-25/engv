@@ -454,7 +454,22 @@ if (alreadyBooked) {
     })}
   </div>
 </aside>
-            <h3 className="text-xl font-bold mb-6 text-blue-900 flex items-center gap-2">
+           {/* Mobile Dropdown Filter */}
+<div className="md:hidden mb-4">
+  <label className="block mb-2 text-sm font-medium text-blue-900">
+    Filter by Domain
+  </label>
+  <select
+    value={selectedDomain}
+    onChange={(e) => setSelectedDomain(e.target.value)}
+    className="w-full px-4 py-2 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+  >
+    {DOMAIN_OPTIONS.map(domain => (
+      <option key={domain} value={domain}>{domain}</option>
+    ))}
+  </select>
+</div>
+
               <BookOpen className="w-5 h-5" />
               Filter by Domain
             </h3>
