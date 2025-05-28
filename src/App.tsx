@@ -1,26 +1,29 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
-import SessionManager from './components/SessionManager';
+
 import Layout from './components/layout/Layout';
+import { ProtectedRoute } from './components/ProtectedRoute';
+
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import LoginPage from './pages/LoginPage';
-import HackPage from './pages/HackPage';
-import CodePage from './pages/CodePage';
 import SignupPage from './pages/SignupPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
-import { ProtectedRoute } from './components/ProtectedRoute';
-import BookingPage from './pages/BookingPage';
-import ProfilePage from './pages/ProfilePage';
 import { VerifyEmail } from './pages/VerifyEmail';
+import ProfilePage from './pages/ProfilePage';
+import BookingPage from './pages/BookingPage';
 import AppointmentsPage from './pages/AppointmentsPage';
 import SessionsPage from './pages/SessionsPage';
 import AptitudeCorner from './components/aptitude/AptitudeCorner';
 import Handouts from './components/aptitude/Handouts';
+import HackPage from './pages/HackPage';
+import CodePage from './pages/CodePage';
+import SessionManager from './components/SessionManager';
 import MentorManagementPage from './pages/MentorManagementPage';
 import MentorBookingPage from './pages/MentorBookingPage';
+import UnauthorizedPage from './pages/UnauthorizedPage'; // New page to show when not authorized
 
 function App() {
   return (
@@ -37,42 +40,35 @@ function App() {
             <Route path="verify-email" element={<VerifyEmail />} />
             <Route path="hack" element={<HackPage />} />
             <Route path="code" element={<CodePage />} />
-            
-            <Route 
-              path="booking" 
+            <Route path="unauthorized" element={<UnauthorizedPage />} />
+
+            {/* Protected User Routes */}
+            <Route
+              path="booking"
               element={
                 <ProtectedRoute>
                   <BookingPage />
                 </ProtectedRoute>
-              } 
+              }
             />
-            <Route 
-              path="appointments" 
+            <Route
+              path="appointments"
               element={
                 <ProtectedRoute>
                   <AppointmentsPage />
                 </ProtectedRoute>
-              } 
+              }
             />
-            <Route 
-              path="profile" 
+            <Route
+              path="profile"
               element={
                 <ProtectedRoute>
                   <ProfilePage />
                 </ProtectedRoute>
-              } 
+              }
             />
-            <Route 
-  path="sessions" 
-  element={
-
-      <SessionsPage />
- 
-  }
-/>
-
             <Route
-              path="/aptitude"
+              path="aptitude"
               element={
                 <ProtectedRoute>
                   <AptitudeCorner />
@@ -80,16 +76,37 @@ function App() {
               }
             />
             <Route
-              path="/handouts"
+              path="handouts"
               element={
                 <ProtectedRoute>
                   <Handouts />
                 </ProtectedRoute>
               }
             />
+
+            {/* Public Route */}
+            <Route path="sessions" element={<SessionsPage />} />
           </Route>
-          <Route path="/manage-sessions" element={<SessionManager />} />
-          <Route path="/manage-mentors" element={<MentorManagementPage />} />
+
+          {/* Admin-only protected routes */}
+          <Route
+            path="/manage-sessions"
+            element={
+              <ProtectedRoute requireAdmin>
+                <SessionManager />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/manage-mentors"
+            element={
+              <ProtectedRoute requireAdmin>
+                <MentorManagementPage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Public route */}
           <Route path="/mentorship" element={<MentorBookingPage />} />
         </Routes>
       </div>
