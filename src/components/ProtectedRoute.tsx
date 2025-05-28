@@ -63,7 +63,16 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     return <Navigate to="/verify-email" state={{ from: location }} replace />;
   }
 
-  if (!isProfileComplete && location.pathname !== '/profile') {
+  const path = location.pathname;
+
+  const isProfilePath = path.startsWith('/profile');
+  const isNotesOrMockTestsPath = path.startsWith('/notes') || path.startsWith('/mocktests');
+
+  if (!isProfileComplete && !isProfilePath) {
+    return <Navigate to="/profile" replace />;
+  }
+
+  if (!isProfileComplete && isNotesOrMockTestsPath) {
     return <Navigate to="/profile" replace />;
   }
 
