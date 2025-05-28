@@ -401,38 +401,55 @@ useEffect(() => {
       <section className="section py-16 bg-gradient-to-br from-gray-50 to-blue-50 min-h-[60vh]">
         <div className="container mx-auto px-4 flex flex-col md:flex-row gap-8">
           {/* Sidebar */}
-          <aside className="w-full md:w-72 bg-white rounded-2xl shadow-lg p-6 mb-8 md:mb-0 md:mr-8 flex-shrink-0 border border-blue-100">
-            <h3 className="text-xl font-bold mb-6 text-blue-900 flex items-center gap-2">
-              <BookOpen className="w-5 h-5" />
-              Filter by Domain
-            </h3>
-            <div className="flex flex-col gap-3">
-              {DOMAIN_OPTIONS.map(domain => {
-                const Icon = DOMAIN_ICONS[domain] || BookOpen;
-                return (
-                  <label
-                    key={domain}
-                    className={`flex items-center gap-3 cursor-pointer rounded-xl px-4 py-3 transition-all duration-200 ${
-                      selectedDomain === domain
-                        ? 'bg-blue-50 border border-blue-200 shadow-sm'
-                        : 'hover:bg-gray-50'
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name="domain"
-                      value={domain}
-                      checked={selectedDomain === domain}
-                      onChange={() => setSelectedDomain(domain)}
-                      className="accent-blue-600"
-                    />
-                    <Icon className="w-5 h-5 text-blue-600" />
-                    <span className="font-medium text-gray-700">{domain}</span>
-                  </label>
-                );
-              })}
-            </div>
-          </aside>
+        {/* Desktop Sidebar */}
+<aside className="hidden md:block w-full md:w-72 bg-white rounded-2xl shadow-lg p-6 mb-8 md:mb-0 md:mr-8 flex-shrink-0 border border-blue-100">
+  <h3 className="text-xl font-bold mb-6 text-blue-900 flex items-center gap-2">
+    <BookOpen className="w-5 h-5" />
+    Filter by Domain
+  </h3>
+  <div className="flex flex-col gap-3">
+    {DOMAIN_OPTIONS.map(domain => {
+      const Icon = DOMAIN_ICONS[domain] || BookOpen;
+      return (
+        <label
+          key={domain}
+          className={`flex items-center gap-3 cursor-pointer rounded-xl px-4 py-3 transition-all duration-200 ${
+            selectedDomain === domain
+              ? 'bg-blue-50 border border-blue-200 shadow-sm'
+              : 'hover:bg-gray-50'
+          }`}
+        >
+          <input
+            type="radio"
+            name="domain"
+            value={domain}
+            checked={selectedDomain === domain}
+            onChange={() => setSelectedDomain(domain)}
+            className="accent-blue-600"
+          />
+          <Icon className="w-5 h-5 text-blue-600" />
+          <span className="font-medium text-gray-700">{domain}</span>
+        </label>
+      );
+    })}
+  </div>
+</aside>
+
+{/* Mobile Dropdown */}
+<div className="block md:hidden mb-6">
+  <label htmlFor="domainDropdown" className="block text-sm font-medium text-gray-700 mb-1">Filter by Domain</label>
+  <select
+    id="domainDropdown"
+    value={selectedDomain}
+    onChange={(e) => setSelectedDomain(e.target.value)}
+    className="block w-full px-4 py-2 border border-blue-200 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+  >
+    {DOMAIN_OPTIONS.map(domain => (
+      <option key={domain} value={domain}>{domain}</option>
+    ))}
+  </select>
+</div>
+
 
           {/* Sessions Grid */}
           <div className="flex-1">
