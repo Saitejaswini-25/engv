@@ -103,7 +103,7 @@ const AboutPage: React.FC = () => {
                 <li>Develops practical, job-ready skills aligned with industry standards.</li>
                 <li>Provides career clarity and guidance during critical academic years.</li>
                 <li>Bridges the gap between theory and real-world application.</li>
-                <li>Empowers students to become confident, capable professionals in a competitive world.</li>
+                <li>Empowers students to become confident,capable professionals in competitive world.</li>
               </ul>
             </motion.div>
 
