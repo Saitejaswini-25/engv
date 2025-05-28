@@ -23,7 +23,7 @@ import CodePage from './pages/CodePage';
 import SessionManager from './components/SessionManager';
 import MentorManagementPage from './pages/MentorManagementPage';
 import MentorBookingPage from './pages/MentorBookingPage';
-import UnauthorizedPage from './pages/UnauthorizedPage'; // New page to show when not authorized
+
 
 function App() {
   return (
