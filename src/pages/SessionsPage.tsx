@@ -6,7 +6,6 @@ import {
   addDoc, 
   getDoc,
   doc,
-   deleteDoc,
   serverTimestamp, 
   updateDoc,
   query,
@@ -190,14 +189,13 @@ useEffect(() => {
     const script = document.createElement('script');
     script.src = 'https://checkout.razorpay.com/v1/payment-button.js';
     script.async = true;
-    script.dataset.payment_button_id = 'pl_QW1fJCrtt19YE2';
+    script.dataset.payment_button_id = 'pl_QVF8JctVh7OEfL';
     script.id = 'razorpay-button-script';
 
-    const form = document.getElementById('razorpay-form'); // ✅ <- not container
-    if (form) form.appendChild(script); // ✅ script inside <form>
+    const container = document.getElementById('razorpay-button-container');
+    if (container) container.appendChild(script);
   }
 }, [showPayment]);
-
   const handleBookNow = (session: Session) => {
     if (!currentUser) {
       alert('You must be logged in to book a session');
@@ -252,38 +250,20 @@ useEffect(() => {
       }
       
       // Check for existing bookings
-    // Check for existing bookings
-const bookingsRef = collection(db, 'bookings');
-const q = query(
-  bookingsRef, 
-  where('userId', '==', currentUser.uid),
-  where('sessionId', '==', selectedSession.id)
-);
-const querySnapshot = await getDocs(q);
-
-let alreadyBooked = false;
-
-for (const docSnap of querySnapshot.docs) {
-  const booking = docSnap.data();
-  
-  if (booking.status === 'booked') {
-    alreadyBooked = true;
-    break;
-  }
-
-  // Optional cleanup: remove any pending bookings
-  if (booking.status === 'pending') {
-    await deleteDoc(doc(db, 'bookings', docSnap.id));
-  }
-}
-
-if (alreadyBooked) {
-  setShowConfirm(false);
-  setBookingInProgress(false);
-  alert('You have already booked this session');
-  return;
-}
-
+      const bookingsRef = collection(db, 'bookings');
+      const q = query(
+        bookingsRef, 
+        where('userId', '==', currentUser.uid),
+        where('sessionId', '==', selectedSession.id)
+      );
+      const querySnapshot = await getDocs(q);
+      
+      if (!querySnapshot.empty) {
+        setShowConfirm(false);
+        setBookingInProgress(false);
+        alert('You have already booked this session');
+        return;
+      }
       
       // Check if session is free or paid
       const sessionPrice = selectedSession.price || 0;
@@ -421,55 +401,8 @@ if (alreadyBooked) {
       <section className="section py-16 bg-gradient-to-br from-gray-50 to-blue-50 min-h-[60vh]">
         <div className="container mx-auto px-4 flex flex-col md:flex-row gap-8">
           {/* Sidebar */}
-{/* Desktop Sidebar */}
-<aside className="hidden md:block w-full md:w-72 bg-white rounded-2xl shadow-lg p-6 mb-8 md:mb-0 md:mr-8 flex-shrink-0 border border-blue-100">
-  <h3 className="text-xl font-bold mb-6 text-blue-900 flex items-center gap-2">
-    <BookOpen className="w-5 h-5" />
-    Filter by Domain
-  </h3>
-  <div className="flex flex-col gap-3">
-    {DOMAIN_OPTIONS.map(domain => {
-      const Icon = DOMAIN_ICONS[domain] || BookOpen;
-      return (
-        <label
-          key={domain}
-          className={`flex items-center gap-3 cursor-pointer rounded-xl px-4 py-3 transition-all duration-200 ${
-            selectedDomain === domain
-              ? 'bg-blue-50 border border-blue-200 shadow-sm'
-              : 'hover:bg-gray-50'
-          }`}
-        >
-          <input
-            type="radio"
-            name="domain"
-            value={domain}
-            checked={selectedDomain === domain}
-            onChange={() => setSelectedDomain(domain)}
-            className="accent-blue-600"
-          />
-          <Icon className="w-5 h-5 text-blue-600" />
-          <span className="font-medium text-gray-700">{domain}</span>
-        </label>
-      );
-    })}
-  </div>
-</aside>
-           {/* Mobile Dropdown Filter */}
-<div className="md:hidden mb-4">
-  <label className="block mb-2 text-sm font-medium text-blue-900">
-    Filter by Domain
-  </label>
-  <select
-    value={selectedDomain}
-    onChange={(e) => setSelectedDomain(e.target.value)}
-    className="w-full px-4 py-2 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-  >
-    {DOMAIN_OPTIONS.map(domain => (
-      <option key={domain} value={domain}>{domain}</option>
-    ))}
-  </select>
-</div>
-
+          <aside className="w-full md:w-72 bg-white rounded-2xl shadow-lg p-6 mb-8 md:mb-0 md:mr-8 flex-shrink-0 border border-blue-100">
+            <h3 className="text-xl font-bold mb-6 text-blue-900 flex items-center gap-2">
               <BookOpen className="w-5 h-5" />
               Filter by Domain
             </h3>
@@ -700,9 +633,9 @@ if (alreadyBooked) {
               </p>
               
               {/* Razorpay Payment Button */}
-    <form className="bg-white rounded-lg mb-4" id="razorpay-form">
+             <div className="bg-white rounded-lg mb-4">
   <div id="razorpay-button-container"></div>
-</form>
+</div>
 
 
               
