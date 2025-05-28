@@ -62,11 +62,10 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   if (!isVerified) {
     return <Navigate to="/verify-email" state={{ from: location }} replace />;
   }
-if (!isProfileComplete && location.pathname !== '/profile') {
-  return <Navigate to="/profile" replace />;
-}
 
-
+  if (!isProfileComplete && location.pathname !== '/profile') {
+    return <Navigate to="/profile" replace />;
+  }
 
   return <>{children}</>;
 };
