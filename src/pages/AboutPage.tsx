@@ -98,7 +98,8 @@ const AboutPage: React.FC = () => {
               viewport={{ once: true }}
             >
               <h3 className="text-2xl font-bold mb-4 text-blue-800">Our Mission</h3>
-              <ul className="list-disc list-inside text-gray-700 space-y-2">
+             <ul className="list-disc list-outside text-gray-700 space-y-2 pl-5">
+
                 <li>Ensures students receive relevant, high-quality education for a strong foundation.</li>
                 <li>Develops practical, job-ready skills aligned with industry standards.</li>
                 <li>Provides career clarity and guidance during critical academic years.</li>
@@ -115,7 +116,8 @@ const AboutPage: React.FC = () => {
               viewport={{ once: true }}
             >
               <h3 className="text-2xl font-bold mb-4 text-blue-800">Our Vision</h3>
-              <ul className="list-disc list-inside text-gray-700 space-y-2">
+             <ul className="list-disc list-outside text-gray-700 space-y-2 pl-5">
+
                 <li>Fosters a global community of skilled, confident engineers.</li>
                 <li>Promotes both technical excellence and personal development.</li>
                 <li>Encourages cultural awareness for better global collaboration.</li>
