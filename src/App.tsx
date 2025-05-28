@@ -40,7 +40,7 @@ function App() {
             <Route path="verify-email" element={<VerifyEmail />} />
             <Route path="hack" element={<HackPage />} />
             <Route path="code" element={<CodePage />} />
-            <Route path="unauthorized" element={<UnauthorizedPage />} />
+  
 
             {/* Protected User Routes */}
             <Route
