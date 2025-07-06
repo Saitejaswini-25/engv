@@ -89,8 +89,11 @@ const ContactPage: React.FC = () => {
                 <Phone className="w-8 h-8 text-blue-600" />
               </div>
               <h3 className="text-xl font-bold mb-4">Phone</h3>
-              <a href="tel:+919964030096" className="text-gray-700 hover:text-blue-600 transition-colors">
-                +91 9964030096
+              <a href="tel:+919100100649" className="text-gray-700 hover:text-blue-600 transition-colors">
+                +91 9100100649
+              </a>
+              <a href="tel:+916281941608" className="text-gray-700 hover:text-blue-600 transition-colors">
+                +91 6281941608
               </a>
             </motion.div>
 
@@ -106,8 +109,11 @@ const ContactPage: React.FC = () => {
                 <Mail className="w-8 h-8 text-blue-600" />
               </div>
               <h3 className="text-xl font-bold mb-4">Email</h3>
-              <a href="mailto:contact@engiversee.com" className="text-gray-700 hover:text-blue-600 transition-colors">
-                knowledge@engiversee.com
+              <a href="mailto:saitejaswinigorantla@gmail.com" className="text-gray-700 hover:text-blue-600 transition-colors">
+                saitejaswinigorantla@gmail.com
+              </a>
+               <a href="mailto:bhuvanass2005@gmail.com" className="text-gray-700 hover:text-blue-600 transition-colors">
+                bhuvanass2005@gmail.com
               </a>
             </motion.div>
 
@@ -124,7 +130,7 @@ const ContactPage: React.FC = () => {
               </div>
               <h3 className="text-xl font-bold mb-4">Location</h3>
               <p className="text-gray-700">
-                Bengaluru, Karnataka<br />
+                vizag,Andhrapradesh<br />
                 India
               </p>
             </motion.div>
@@ -252,10 +258,22 @@ const ContactPage: React.FC = () => {
 
           <div className="max-w-3xl mx-auto space-y-6">
             {[
-              { q: 'How can I join Engiversee as a student?', a: 'You can sign up on our website to create an account, which gives you access to our resources, workshops, and events. Many of our resources are available for free.' },
-              { q: 'Do you offer internship opportunities?', a: 'Yes, we offer internship opportunities for students who are interested in gaining practical experience in education technology, content creation, and community management.' },
-              { q: 'Can I volunteer with Engiversee?', a: 'Absolutely! We welcome passionate individuals who want to contribute to our mission. Please reach out to us through the contact form with your details and areas of interest.' },
-              { q: 'How can my institution collaborate with Engiversee?', a: 'We are open to collaborations with educational institutions. Please contact us with your proposal and we will discuss potential partnership opportunities.' },
+             {
+    q: 'How can I join EduConnect as a learner?',
+    a: 'You can easily sign up on our website to create a free account. Once registered, you’ll get access to our workshops, sessions, and curated learning resources.'
+  },
+  {
+    q: 'Are the workshops free or paid?',
+    a: 'EduConnect offers a mix of free and paid workshops. Most beginner-level sessions are free, while advanced and expert-led workshops may require a small fee.'
+  },
+  {
+    q: 'Can I get a certificate for attending a workshop?',
+    a: 'Yes, participants receive digital certificates upon successful completion of eligible workshops or mentorship sessions hosted on EduConnect.'
+  },
+  {
+    q: 'How can I contribute to EduConnect as a mentor or speaker?',
+    a: 'We’re always looking for experienced professionals to host sessions or mentor learners. Fill out the mentor registration form on our website and our team will reach out to you.'
+  },
             ].map((faq, index) => (
               <div key={index} className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-xl font-bold mb-3">{faq.q}</h3>
